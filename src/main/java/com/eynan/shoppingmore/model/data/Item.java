@@ -3,23 +3,28 @@ package com.eynan.shoppingmore.model.data;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
+@Table(name = "item")
 @Data
 public class Item {
     @Id
     @Column(name = "item_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long itemId;
+    private String itemId;
 
     @Column
     private String name;
     @Column
     private String description;
     @Column
-    private long price;
+    private double price;
     @Column
-    private long amount;
+    private double amount;
+
+    public Item(){
+        itemId = UUID.randomUUID().toString();
+    }
 
 }
 

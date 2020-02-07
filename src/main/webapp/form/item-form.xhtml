@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="../layout.xhtml">
+    <ui:define name="content">
+        <h:form id="itemForm">
+            <p:panel header="Item Details">
+                <h:panelGrid columns="1">
+                    <p:outputLabel for="name" value="Name: " />
+                    <p:inputText id="name" value="#{itemController.item.name}" />
+                    <p:outputLabel for="price" value="Price: " />
+                    <p:inputNumber id="price" value="#{itemController.item.price}" />
+                    <h:commandButton value="Save" action="#{itemController.save}" />
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
