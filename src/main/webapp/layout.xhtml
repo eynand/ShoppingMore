@@ -3,6 +3,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:sec="http://www.springframework.org/security/tags"
       xmlns:p="http://primefaces.org/ui">
 <f:view>
     <h:head>
@@ -12,19 +13,23 @@
         <title>Product</title>
     </h:head>
     <h:body>
+        <p:stack icon="/resources/images/stack.png" expanded="true">
+            <p:menuitem value="Home" icon="/resources/images/home.png" url="#" rendered='#{login.isLogin()}'/>
+            <p:menuitem value="Items" icon="/resources/images/music.png" url="/views/items.xhtml"/>
+            <p:menuitem value="Login" icon="/resources/images/email.png" url="/views/login.xhtml" rendered='#{! login.isLogin()}' />
+            <p:menuitem value="Logout" icon="/resources/images/email.png" url="/logout" rendered='#{login.isLogin()}' />
+            <p:menuitem value="Home" icon="/resources/images/email.png" url="/views/home.xhtml" rendered='#{login.isLogin()}' />
+            <p:menuitem value="Portfolio" icon="/resources/images/portfolio.png" url="#"/>
+        </p:stack>
         <div class="ui-g">
             <div class="ui-g-12">
-                <p:toolbar>
-                    <f:facet name="left">
-                        <p:button href="/" value="List of Products" />
-                        <p:button href="/item" value="New Product" />
-                    </f:facet>
-                </p:toolbar>
             </div>
             <div class="ui-g-12">
                 <ui:insert name="content" />
             </div>
         </div>
+        <p:link outcome="/views/registration.xhtml" value="Registration"  rendered='#{! login.isLogin()}'>
+        </p:link>
     </h:body>
 </f:view>
 </html>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html content="html" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition template="../layout.xhtml">
+    <style type="text/css">
+     .value {
+        font-weight: bold;
+    }
+
+    .ui-carousel {
+        margin-bottom: 20px;
+    }
+
+    </style>
+
+    <ui:define name="content">
+        <h:outputText value="Hey #{ordersController.userService.getCurrentUser().username}! welcome to your homepage"/>
+        <p:toolbar>
+            <f:facet name="left">
+                <p:button href="/form/product-form.xhtml" value="New Product" rendered='#{login.isLogin()}'/>
+            </f:facet>
+        </p:toolbar>
+        <h:outputStylesheet library="css" name="login.css"/>
+        <p:panel id="orders" header="Your Orders"
+                 footer="You have #{ordersController.getPendingOrders()} Pending Orders" style="margin-bottom:20px">
+            <p:dataTable var="order" value="#{ordersController.getOrders()}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{order.orderId}"/>
+                </p:column>
+
+                <p:column headerText="# Products">
+                    <p:commandButton type="button" id="productsOrders" value="#{order.products.size()}"
+                                     onclick="PF('orderProducts').loadContents()"
+                                     oncomplete="PF('orderProducts').show()">
+                        <p:overlayPanel id="orderProducts" for="productsOrders" hideEffect="fade" dynamic="true"
+                                        style="width:600px" modal="true">
+                            <p:dataTable var="product" value="#{order.products}" rows="5"
+                                         paginator="true">
+                                <p:column headerText="Product">
+                                    <h:outputText value="#{product.productId}"/>
+                                </p:column>
+
+                                <p:column headerText="Directed By">
+                                    <h:outputText value="#{product.productId}"/>
+                                </p:column>
+
+                                <p:column headerText="Genres">
+                                    <h:outputText value="#{product.productId}"/>
+                                </p:column>
+
+                                <p:column headerText="Run Time(min.)">
+                                    <h:outputText value="#{product.productId}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:overlayPanel>
+                    </p:commandButton>
+                </p:column>
+
+                <p:column headerText="Amount">
+                    <h:outputText value="#{order.getOrderAmount()}"/>
+                </p:column>
+
+                <p:column headerText="Status">
+                    <h:outputText value="#{order.status}"/>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+        <p:panel id="products" header="Your Products"
+                 footer="You have #{productController.getProducts().size()} Products" style="margin-bottom:20px">
+            <p:dataTable var="product" value="#{productController.getProducts()}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{product.productId}"/>
+                </p:column>
+
+                <p:column headerText="Price">
+                    <h:outputText value="#{product.price}"/>
+                </p:column>
+
+                <p:column headerText="Amount">
+                    <h:outputText value="#{product.amount}"/>
+                </p:column>
+                <p:column>
+                    <h:form>
+                        <p:splitButton id="basic" value="Actions" icon="pi pi-save">
+                            <p:menuitem value="Delete Product" action="#{productController.deleteProduct}"
+                                        update="products" icon="pi pi-refresh">
+                                <f:setPropertyActionListener value="#{product}" target="#{productController.product}"/>
+                            </p:menuitem>
+                            <p:menuitem value="Edit Product" action="#{productController.newProduct}"
+                                        icon="pi pi-refresh">
+                                <f:setPropertyActionListener value="#{product}" target="#{productController.product}"/>
+                            </p:menuitem>
+                        </p:splitButton>
+                    </h:form>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+        <p:panel id="productOrders" header="Products Orders"
+                 footer="You have #{productController.getProductOrders().size()} Products Orders"
+                 style="margin-bottom:20px">
+            <p:dataTable var="order" value="#{productController.getProductOrders()}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{order.orderId}"/>
+                </p:column>
+
+                <p:column headerText="# Products">
+                    <p:commandButton type="button" id="productsOrders" value="#{order.products.size()}"
+                                     onclick="PF('orderProducts').loadContents()"
+                                     oncomplete="PF('orderProducts').show()">
+                        <p:overlayPanel id="orderProducts" for="productsOrders" hideEffect="fade" dynamic="true"
+                                        style="width:600px" modal="true">
+                            <p:dataTable var="product" value="#{order.products}" rows="5"
+                                         paginator="true">
+                                <p:column headerText="Product">
+                                    <h:outputText value="#{product.productId}"/>
+                                </p:column>
+
+                                <p:column headerText="Directed By">
+                                    <h:outputText value="#{product.productId}"/>
+                                </p:column>
+
+                                <p:column headerText="Genres">
+                                    <h:outputText value="#{product.productId}"/>
+                                </p:column>
+
+                                <p:column headerText="Run Time(min.)">
+                                    <h:outputText value="#{product.productId}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:overlayPanel>
+                    </p:commandButton>
+                </p:column>
+
+                <p:column headerText="Amount">
+                    <h:outputText value="#{order.getOrderAmount()}"/>
+                </p:column>
+
+                <p:column headerText="Status">
+                    <h:outputText value="#{order.status}"/>
+                </p:column>
+                <p:column>
+                    <h:form>
+                        <p:splitButton id="basic" value="Actions" icon="pi pi-save">
+                            <p:menuitem value="Delete Order" action="#{ordersController.deleteOrder}"
+                                        update="productOrders" icon="pi pi-refresh">
+                                <f:setPropertyActionListener value="#{order}"
+                                                             target="#{ordersController.selectedOrder}"/>
+                            </p:menuitem>
+                            <p:menuitem value="Complete Order" action="#{ordersController.completeOrder}"
+                                        update="productOrders" icon="pi pi-refresh"
+                                        rendered="#{order.status.equals('Pending')}">
+                                <f:setPropertyActionListener value="#{order}"
+                                                             target="#{ordersController.selectedOrder}"/>
+                            </p:menuitem>
+                        </p:splitButton>
+                    </h:form>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+</html>

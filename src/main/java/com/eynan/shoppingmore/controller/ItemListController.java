@@ -1,37 +1,53 @@
 package com.eynan.shoppingmore.controller;
 
-import com.eynan.shoppingmore.model.data.Item;
-import com.eynan.shoppingmore.repository.ItemRepository;
-import org.ocpsoft.rewrite.annotation.Join;
-import org.ocpsoft.rewrite.annotation.RequestAction;
-import org.ocpsoft.rewrite.el.ELBeanName;
-import org.ocpsoft.rewrite.faces.annotation.Deferred;
-import org.ocpsoft.rewrite.faces.annotation.IgnorePostback;
+import com.eynan.shoppingmore.model.data.CartItem;
+import com.eynan.shoppingmore.model.data.Product;
+import com.eynan.shoppingmore.model.data.ShoppingCart;
+import com.eynan.shoppingmore.repository.ProductRepository;
+import com.eynan.shoppingmore.service.OrderService;
+import com.eynan.shoppingmore.service.ShoppingCartService;
+import com.eynan.shoppingmore.service.UserService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 
 @Scope(value = "session")
 @Component(value = "itemList")
-@ELBeanName(value = "itemList")
-@Join(path = "/", to = "/views/items.jsf")
+@Data
 public class ItemListController {
     @Autowired
-    private ItemRepository itemRepository;
+    private ShoppingCartService shoppingCartService;
+    @Autowired
+    private OrderService orderService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ProductRepository itemRepository;
+    private Product selectedItem;
 
-    private List<Item> items;
 
-    @Deferred
-    @RequestAction
-    @IgnorePostback
-    public void loadData() {
-        items = itemRepository.findAll();
+    public List<Product>  loadData() {
+        return itemRepository.findAll();
     }
 
-    public List<Item> getItem() {
-        return items;
+    public void addToCart() {
+        shoppingCartService.addToCart(selectedItem,userService.getCurrentUser());
+    }
+
+    public int getCartCount(){
+        return userService.getCurrentUser().getShoppingCart().getItems().size();
+    }
+
+    public Set<CartItem> getShoppingCartItems(){
+        return userService.getCurrentUser().getShoppingCart().getItems();
+    }
+
+    public void buyItems(){
+        orderService.buyCart(userService.getCurrentUser().getShoppingCart(),userService.getCurrentUser());
     }
 }
 

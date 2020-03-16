@@ -29,3 +29,13 @@ build/
 
 ### VS Code ###
 .vscode/
+data/shoppingmore.script
+data/shoppingmore.properties
+data/shoppingmore.log
+data/shoppingmore.lck
+.mvn/wrapper/maven-wrapper.properties
+.mvn/wrapper/maven-wrapper.jar
+src/main/webapp/WEB-INF/classes/application.properties
+src/main/webapp/WEB-INF/classes/db/migration/V2__Item.sql
+src/main/webapp/WEB-INF/classes/application.properties
+src/main/webapp/WEB-INF/classes/db/migration/V2__Item.sql
