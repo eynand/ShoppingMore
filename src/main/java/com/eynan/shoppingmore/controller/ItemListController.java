@@ -5,6 +5,7 @@ import com.eynan.shoppingmore.model.data.Product;
 import com.eynan.shoppingmore.model.data.ShoppingCart;
 import com.eynan.shoppingmore.repository.ProductRepository;
 import com.eynan.shoppingmore.service.OrderService;
+import com.eynan.shoppingmore.service.ProductService;
 import com.eynan.shoppingmore.service.ShoppingCartService;
 import com.eynan.shoppingmore.service.UserService;
 import lombok.Data;
@@ -14,9 +15,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Scope(value = "session")
-@Component(value = "itemList")
+@Component(value = "itemListController")
 @Data
 public class ItemListController {
     @Autowired
@@ -27,12 +29,35 @@ public class ItemListController {
     private UserService userService;
     @Autowired
     private ProductRepository itemRepository;
+    @Autowired
+    private ProductService productService;
     private Product selectedItem;
+    private CartItem selectedCartItem;
+    private List<Product> allProducts;
+    private String category;
 
-
-    public List<Product>  loadData() {
-        return itemRepository.findAll();
+    public void searchCategory() {
+        allProducts = itemRepository.findAll();
+        if (category != null ||  ! category.isEmpty()){
+            allProducts = allProducts.stream().filter(p -> p.getCategory().contains(category)).collect(Collectors.toList());
+        }
     }
+
+    public List<String> getByCategory(String query) {
+        return productService.getAllProductsByCategory(query).stream().map(p -> p.getCategory()).distinct().collect(Collectors.toList());
+    }
+
+    public void removeCartItem() {
+        shoppingCartService.deleteFromCart(selectedCartItem);
+    }
+
+    public List<Product> loadData() {
+
+        if (allProducts == null) {
+            allProducts = itemRepository.findAll();
+        }
+        return allProducts;
+}
 
     public void addToCart() {
         shoppingCartService.addToCart(selectedItem,userService.getCurrentUser());

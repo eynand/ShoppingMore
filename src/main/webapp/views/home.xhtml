@@ -39,20 +39,20 @@
                                         style="width:600px" modal="true">
                             <p:dataTable var="product" value="#{order.products}" rows="5"
                                          paginator="true">
-                                <p:column headerText="Product">
-                                    <h:outputText value="#{product.productId}"/>
+                                <p:column headerText="Name">
+                                    <h:outputText value="#{product.name}"/>
                                 </p:column>
 
-                                <p:column headerText="Directed By">
-                                    <h:outputText value="#{product.productId}"/>
+                                <p:column headerText="Description">
+                                    <h:outputText value="#{product.description}"/>
                                 </p:column>
 
-                                <p:column headerText="Genres">
-                                    <h:outputText value="#{product.productId}"/>
+                                <p:column headerText="Category">
+                                    <h:outputText value="#{product.category}"/>
                                 </p:column>
 
-                                <p:column headerText="Run Time(min.)">
-                                    <h:outputText value="#{product.productId}"/>
+                                <p:column headerText="Price">
+                                    <h:outputText value="#{product.price}"/>
                                 </p:column>
                             </p:dataTable>
                         </p:overlayPanel>
@@ -71,12 +71,16 @@
         <p:panel id="products" header="Your Products"
                  footer="You have #{productController.getProducts().size()} Products" style="margin-bottom:20px">
             <p:dataTable var="product" value="#{productController.getProducts()}">
-                <p:column headerText="Id">
-                    <h:outputText value="#{product.productId}"/>
+                <p:column headerText="Name">
+                    <h:outputText value="#{product.name}"/>
                 </p:column>
 
                 <p:column headerText="Price">
                     <h:outputText value="#{product.price}"/>
+                </p:column>
+
+                <p:column headerText="Category">
+                    <h:outputText value="#{product.category}"/>
                 </p:column>
 
                 <p:column headerText="Amount">
@@ -101,6 +105,7 @@
         <p:panel id="productOrders" header="Products Orders"
                  footer="You have #{productController.getProductOrders().size()} Products Orders"
                  style="margin-bottom:20px">
+            <p:messages id="msgs" />
             <p:dataTable var="order" value="#{productController.getProductOrders()}">
                 <p:column headerText="Id">
                     <h:outputText value="#{order.orderId}"/>
@@ -114,20 +119,16 @@
                                         style="width:600px" modal="true">
                             <p:dataTable var="product" value="#{order.products}" rows="5"
                                          paginator="true">
-                                <p:column headerText="Product">
-                                    <h:outputText value="#{product.productId}"/>
+                                <p:column headerText="Name">
+                                    <h:outputText value="#{product.name}"/>
                                 </p:column>
 
-                                <p:column headerText="Directed By">
-                                    <h:outputText value="#{product.productId}"/>
+                                <p:column headerText="Price">
+                                    <h:outputText value="#{product.price}"/>
                                 </p:column>
 
-                                <p:column headerText="Genres">
-                                    <h:outputText value="#{product.productId}"/>
-                                </p:column>
-
-                                <p:column headerText="Run Time(min.)">
-                                    <h:outputText value="#{product.productId}"/>
+                                <p:column headerText="Category">
+                                    <h:outputText value="#{product.category}"/>
                                 </p:column>
                             </p:dataTable>
                         </p:overlayPanel>

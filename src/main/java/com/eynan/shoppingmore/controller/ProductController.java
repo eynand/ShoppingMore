@@ -21,12 +21,14 @@ public class ProductController {
     private UserService userService;
     private Product product = new Product();
 
+
     public String save() {
         product.setUser(userService.getCurrentUser());
         productService.newProduct(product);
         product = new Product();
         return "/views/home.xhtml?faces-redirect=true";
     }
+
 
     public String newProduct(){
         return "/form/product-form.xhtml";

@@ -9,8 +9,14 @@
                 <h:panelGrid columns="1">
                     <p:outputLabel for="name" value="Name: " />
                     <p:inputText id="name" value="#{productController.product.name}" />
+                    <p:outputLabel for="description" value="Description: " />
+                    <p:inputText id="description" value="#{productController.product.description}" />
                     <p:outputLabel for="price" value="Price: " />
                     <p:inputNumber id="price" value="#{productController.product.price}" />
+                    <p:outputLabel for="amount" value="Amount: " />
+                    <p:inputNumber id="amount" value="#{productController.product.amount}" />
+                    <p:outputLabel for="category" value="Category: " />
+                    <p:inputText id="category" value="#{productController.product.category}" />
                     <h:commandButton value="Save" action="#{productController.save}" />
                 </h:panelGrid>
             </p:panel>

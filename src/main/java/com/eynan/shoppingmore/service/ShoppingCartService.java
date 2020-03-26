@@ -9,9 +9,6 @@ import com.eynan.shoppingmore.repository.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Service
 public class ShoppingCartService {
 
@@ -24,6 +21,10 @@ public class ShoppingCartService {
     public ShoppingCart createShoppingCartForUser(ShoppingCart shoppingCart){
         shoppingCartRepository.save(shoppingCart);
         return shoppingCart;
+    }
+
+    public void deleteFromCart(CartItem cartItem) {
+        cartItemRepository.delete(cartItem);
     }
 
     public void addToCart(Product product, User user) {

@@ -1,7 +1,5 @@
 package com.eynan.shoppingmore.model.data;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +19,8 @@ public class Product {
     private double price;
     @Column
     private double amount;
+    @Column
+    private String category;
     @ManyToMany(mappedBy = "products")
     private List<Order> orders = new ArrayList<>();
     @OneToOne
@@ -94,5 +94,12 @@ public class Product {
                 '}';
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 }
 

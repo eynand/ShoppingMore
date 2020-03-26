@@ -6,20 +6,23 @@
       xmlns:sec="http://www.springframework.org/security/tags"
       xmlns:p="http://primefaces.org/ui">
 <f:view>
+
     <h:head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Product</title>
+        <title>ShoppingMore</title>
+        <h:panelGrid >
+            <h1 style="text-align: center">ShoppingMore!</h1>
+            <h3 style="text-align: left">The Best Place To Buy...</h3>
+        </h:panelGrid>
     </h:head>
     <h:body>
         <p:stack icon="/resources/images/stack.png" expanded="true">
-            <p:menuitem value="Home" icon="/resources/images/home.png" url="#" rendered='#{login.isLogin()}'/>
             <p:menuitem value="Items" icon="/resources/images/music.png" url="/views/items.xhtml"/>
             <p:menuitem value="Login" icon="/resources/images/email.png" url="/views/login.xhtml" rendered='#{! login.isLogin()}' />
             <p:menuitem value="Logout" icon="/resources/images/email.png" url="/logout" rendered='#{login.isLogin()}' />
             <p:menuitem value="Home" icon="/resources/images/email.png" url="/views/home.xhtml" rendered='#{login.isLogin()}' />
-            <p:menuitem value="Portfolio" icon="/resources/images/portfolio.png" url="#"/>
         </p:stack>
         <div class="ui-g">
             <div class="ui-g-12">

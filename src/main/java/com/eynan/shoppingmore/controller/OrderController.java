@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import java.util.List;
 
 @Scope(value = "session")
@@ -32,7 +34,12 @@ public class OrderController {
     }
 
     public void completeOrder(){
-        orderService.completeOrder(selectedOrder);
+        try {
+            orderService.completeOrder(selectedOrder);
+        }catch (Exception ex) {
+            FacesContext.getCurrentInstance().addMessage("Critical",
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error To Complete Order - " + ex.getMessage(),ex.getMessage()));
+        }
     }
 
     public void deleteOrder(){

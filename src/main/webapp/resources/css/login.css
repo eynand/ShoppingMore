@@ -24,3 +24,12 @@ h2 {
 .red {
   color: #F44336;
 }
+
+.header {
+    background-color:#66cc33;
+    color:white;
+    text-align:center;
+    padding:5px;
+    border: 10px solid;
+    border-radius: 25px;
+}

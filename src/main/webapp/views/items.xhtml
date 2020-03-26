@@ -6,15 +6,10 @@
       xmlns:p="http://primefaces.org/ui">
 <ui:composition template="../layout.xhtml">
     <style type="text/css">
-     .value {
+    .value {
         font-weight: bold;
     }
-
-    .ui-carousel {
-        margin-bottom: 20px;
-    }
-
-    </style>
+</style>
     <ui:define name="content">
         <div class="ui-g">
             <div class="ui-g-12">
@@ -22,33 +17,46 @@
                     <f:facet name="left">
                         <p:commandButton id="cartItems" type="button" onclick="PF('cartItemsList').loadContents()"
                                          oncomplete="PF('cartItemsList').show()"
-                                         value="Shopping Cart (#{itemList.getCartCount()})"
+                                         value="Shopping Cart (#{itemListController.getCartCount()})"
                                          rendered='#{login.isLogin()}'>
                             <p:overlayPanel id="cartItemsList" for="cartItems" hideEffect="fade" dynamic="true"
                                             style="width:600px" modal="true">
-                                <p:dataTable var="cartItem" value="#{itemList.getShoppingCartItems()}" rows="5"
+                                <p:dataTable var="cartItem" value="#{itemListController.getShoppingCartItems()}" rows="5"
                                              paginator="true">
                                     <p:column headerText="Product">
-                                        <h:outputText value="#{cartItem.cartItemId}"/>
+                                        <h:outputText value="#{cartItem.product.name}"/>
                                     </p:column>
 
-                                    <p:column headerText="Directed By">
-                                        <h:outputText value="#{cartItem.cartItemId}"/>
+                                    <p:column headerText="Description">
+                                        <h:outputText value="#{cartItem.product.description}"/>
                                     </p:column>
 
-                                    <p:column headerText="Genres">
-                                        <h:outputText value="#{cartItem.cartItemId}"/>
+                                    <p:column headerText="Price">
+                                        <h:outputText value="#{cartItem.product.price}"/>
                                     </p:column>
 
-                                    <p:column headerText="Run Time(min.)">
-                                        <h:outputText value="#{cartItem.cartItemId}"/>
+                                    <p:column headerText="Category">
+                                        <h:outputText value="#{cartItem.product.category}"/>
                                     </p:column>
-                                    <p:commandButton value="Remove"/>
+                                    <p:column headerText="Remove">
+                                        <p:commandButton value="Remove" update="cartItemsList" action="#{itemListController.removeCartItem()}">
+                                            <f:setPropertyActionListener value="#{cartItem}" target="#{itemListController.selectedCartItem}"/>
+                                        </p:commandButton>
+                                    </p:column>
                                 </p:dataTable>
                                 <p:commandButton value="Buy Items" update="cartItemsList"
-                                                 action="#{itemList.buyItems()}"/>
+                                                 action="#{itemListController.buyItems()}"/>
                             </p:overlayPanel>
                         </p:commandButton>
+                        <h:form>
+                            <p:outputLabel value="Search Category:" for="category" />
+                            <p:autoComplete id="category" value="#{itemListController.category}" completeMethod="#{itemListController.getByCategory}">
+    <!--                                  <p:ajax event="click" listener="#{itemListController.searchCategory}" update="form" />-->
+                            </p:autoComplete>
+                            <p:commandButton value="Search" action="#{itemListController.searchCategory}" icon="pi pi-check" update="form" >
+<!--                                <f:setPropertyActionListener value="A1" target="#{itemListController.category}"/>-->
+                            </p:commandButton>
+                        </h:form>
                     </f:facet>
                 </p:toolbar>
             </div>
@@ -57,35 +65,35 @@
             </div>
         </div>
         <h:form id="form">
-            <p:carousel value="#{itemList.loadData()}" headerText="Responsive" var="product"
-                        itemStyle="text-align:center" responsive="true">
-                <p:panelGrid columns="2" style="width:100%;margin:10px 0px" columnClasses="label,value" layout="grid"
-                             styleClass="ui-panelgrid-blank">
-                    <f:facet name="header">
-                        <p:graphicImage name="demo/images/car/1.gif"/>
-                    </f:facet>
+            <p:dataGrid id="items" value="#{itemListController.loadData()}" headerText="Responsive" var="product"
+                         layout="grid"
+                         rows="12" paginator="true"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="6,12,16">
+                <p:panel header="#{product.name}" style="text-align:center">
+                <p:panelGrid columns="2" style="width:100%;margin:10px 0px" columnClasses="value">
+                    <h:outputText value="Description:"/>
+                    <h:outputText value="#{product.description}"/>
 
-                    <h:outputText value="Id:"/>
-                    <h:outputText value="#{product.productId}"/>
-
-                    <h:outputText value="Color:"/>
-                    <h:outputText value="#{product.name}" style="color:#{car.color}"/>
+                    <h:outputText value="Category:"/>
+                    <h:outputText value="#{product.category}" style="color:#{car.color}"/>
 
                     <h:outputText value="Price"/>
                     <h:outputText value="$#{product.price}"/>
 
                     <f:facet name="footer">
-                        <p:commandButton update="cartItems" action="#{itemList.addToCart()}" value="Add To Cart"
+                        <p:commandButton update="cartItems" action="#{itemListController.addToCart()}" value="Add To Cart"
                                          icon="pi pi-search" rendered='#{login.isLogin()}'>
-                            <f:setPropertyActionListener value="#{product}" target="#{itemList.selectedItem}"/>
+                            <f:setPropertyActionListener value="#{product}" target="#{itemListController.selectedItem}"/>
                         </p:commandButton>
                     </f:facet>
                 </p:panelGrid>
+                </p:panel>
 
                 <f:facet name="footer">
-                    In total there are #{itemList.loadData().size()} products.
+                    In total there are #{itemListController.loadData().size()} products.
                 </f:facet>
-            </p:carousel>
+            </p:dataGrid>
         </h:form>
     </ui:define>
 </ui:composition>

@@ -2,6 +2,7 @@ create table products (
   product_id varchar (255) not null,
   name varchar (255) not null,
   description varchar (255),
+  category varchar (255),
   user_id varchar (255),
   price double not null,
   amount double not null,

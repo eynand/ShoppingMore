@@ -50,7 +50,9 @@ public class OrderService {
 
     public void completeOrder(Order order){
         for (Product product:order.getProducts()){
-            product.setAmount(product.getAmount() - 1);
+            if (product.getAmount() == 0) {
+                throw new RuntimeException("Product " + product.getName() + " is missing from inventory, Order cannot be completed");
+            }
             productService.decreaseProductAmount(product);
         }
         order.setStatus(Constants.ORDER_STATUS.Closed.name());
