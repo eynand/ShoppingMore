@@ -28,8 +28,6 @@ public class ItemListController {
     @Autowired
     private UserService userService;
     @Autowired
-    private ProductRepository itemRepository;
-    @Autowired
     private ProductService productService;
     private Product selectedItem;
     private CartItem selectedCartItem;
@@ -37,7 +35,7 @@ public class ItemListController {
     private String category;
 
     public void searchCategory() {
-        allProducts = itemRepository.findAll();
+        allProducts = productService.getAllProducts();
         if (category != null ||  ! category.isEmpty()){
             allProducts = allProducts.stream().filter(p -> p.getCategory().contains(category)).collect(Collectors.toList());
         }
@@ -54,7 +52,7 @@ public class ItemListController {
     public List<Product> loadData() {
 
         if (allProducts == null) {
-            allProducts = itemRepository.findAll();
+            allProducts = productService.getAllProducts();
         }
         return allProducts;
 }

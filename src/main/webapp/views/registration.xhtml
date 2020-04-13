@@ -9,25 +9,25 @@
 <body>
 <h:form id="registrationForm">
     <p:panel header="Registration Form" style="width: 500px;">
-        <p:messages/>
+        <p:messages id="msg" autoUpdate="true" globalOnly="true" display="text"/>
         <h:panelGrid columns="2">
             <p:outputLabel value="UserName:"/>
-            <p:inputText id="userName" value="#{registrationController.user.username}" label="UserName" />
+            <p:inputText id="userName" value="#{registrationController.user.username}" validator="#{registrationController.validateUserName}" required="true" label="UserName" />
 
             <p:outputLabel value="Password:"/>
-            <p:password id="password" value="#{registrationController.user.password}" label="Password"/>
+            <p:password id="password" value="#{registrationController.user.password}" required="true" validator="#{registrationController.validatePassword}" label="Password"/>
 
             <p:outputLabel value="FirstName:"/>
-            <p:inputText id="firstName" value="#{registrationController.user.firstName}" label="FirstName"/>
+            <p:inputText id="firstName" value="#{registrationController.user.firstName}" required="true" label="FirstName"/>
 
             <p:outputLabel value="LastName:"/>
-            <p:inputText id="lastName" value="#{registrationController.user.lastName}"/>
+            <p:inputText id="lastName" value="#{registrationController.user.lastName}" required="true"/>
 
             <p:outputLabel value="Email:"/>
-            <p:inputText id="email" value="#{registrationController.user.email}"/>
+            <p:inputText id="email" value="#{registrationController.user.email}" validator="#{registrationController.validateEmail}" required="true"/>
 
             <p:outputLabel value=""/>
-            <p:commandButton action="#{registrationController.registerNewUser}" value="Register"/>
+            <p:commandButton action="#{registrationController.registerNewUser}"  value="Register"/>
 
         </h:panelGrid>
     </p:panel>

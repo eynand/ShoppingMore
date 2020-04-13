@@ -17,7 +17,8 @@
     </style>
 
     <ui:define name="content">
-        <h:outputText value="Hey #{ordersController.userService.getCurrentUser().username}! welcome to your homepage"/>
+        <h3 style="text-align: center">Hey #{ordersController.userService.getCurrentUser().username}!</h3>
+        <h3 style="text-align: center">Welcome to your homepage </h3>
         <p:toolbar>
             <f:facet name="left">
                 <p:button href="/form/product-form.xhtml" value="New Product" rendered='#{login.isLogin()}'/>

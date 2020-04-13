@@ -115,7 +115,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-	</dependencies>
+    </dependencies>
 	<build>
 		<outputDirectory>/src/main/webapp/WEB-INF/classes</outputDirectory>
 		<plugins>
