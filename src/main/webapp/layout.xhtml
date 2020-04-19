@@ -12,12 +12,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>ShoppingMore</title>
-        <h:panelGrid >
-            <h1 style="text-align: center">ShoppingMore!</h1>
-            <h3 style="text-align: left">The Best Place To Buy...</h3>
-        </h:panelGrid>
     </h:head>
     <h:body>
+        <h:panelGrid >
+            <h1 style="text-align: center">ShoppingMore!</h1>
+            <h3 style="text-align: center">The Best Place To Buy...</h3>
+        </h:panelGrid>
         <p:stack icon="/resources/images/stack.png" expanded="true">
             <p:menuitem value="Items" icon="/resources/images/music.png" url="/views/items.xhtml"/>
             <p:menuitem value="Login" icon="/resources/images/email.png" url="/views/login.xhtml" rendered='#{! login.isLogin()}' />

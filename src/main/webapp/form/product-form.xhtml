@@ -8,15 +8,15 @@
             <p:panel header="Item Details">
                 <h:panelGrid columns="1">
                     <p:outputLabel for="name" value="Name: " />
-                    <p:inputText id="name" value="#{productController.product.name}" />
+                    <p:inputText id="name" value="#{productController.product.name}" required="true" />
                     <p:outputLabel for="description" value="Description: " />
-                    <p:inputText id="description" value="#{productController.product.description}" />
+                    <p:inputText id="description" value="#{productController.product.description}" required="true" />
                     <p:outputLabel for="price" value="Price: " />
-                    <p:inputNumber id="price" value="#{productController.product.price}" />
+                    <p:inputNumber id="price" value="#{productController.product.price}" required="true" />
                     <p:outputLabel for="amount" value="Amount: " />
-                    <p:inputNumber id="amount" value="#{productController.product.amount}" />
+                    <p:inputNumber id="amount" value="#{productController.product.amount}" required="true" />
                     <p:outputLabel for="category" value="Category: " />
-                    <p:inputText id="category" value="#{productController.product.category}" />
+                    <p:inputText id="category" value="#{productController.product.category}" required="true" />
                     <h:commandButton value="Save" action="#{productController.save}" />
                 </h:panelGrid>
             </p:panel>
