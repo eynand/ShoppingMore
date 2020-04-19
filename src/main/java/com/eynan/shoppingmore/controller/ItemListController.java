@@ -2,8 +2,6 @@ package com.eynan.shoppingmore.controller;
 
 import com.eynan.shoppingmore.model.data.CartItem;
 import com.eynan.shoppingmore.model.data.Product;
-import com.eynan.shoppingmore.model.data.ShoppingCart;
-import com.eynan.shoppingmore.repository.ProductRepository;
 import com.eynan.shoppingmore.service.OrderService;
 import com.eynan.shoppingmore.service.ProductService;
 import com.eynan.shoppingmore.service.ShoppingCartService;

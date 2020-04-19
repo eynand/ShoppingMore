@@ -1,8 +1,6 @@
 package com.eynan.shoppingmore.security;
 
-//import org.ocpsoft.rewrite.servlet.RewriteFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,11 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import javax.servlet.*;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.EnumSet;
 
 
 @Configuration

@@ -3,7 +3,6 @@ package com.eynan.shoppingmore.controller;
 import com.eynan.shoppingmore.model.data.User;
 import com.eynan.shoppingmore.service.ShoppingCartService;
 import com.eynan.shoppingmore.service.UserService;
-import com.eynan.shoppingmore.validator.UserValidator;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -23,8 +22,6 @@ public class RegistrationController {
     UserService userService;
     @Autowired
     ShoppingCartService shoppingCartService;
-    @Autowired
-    UserValidator userValidator;
 
     private User user = new User();
 

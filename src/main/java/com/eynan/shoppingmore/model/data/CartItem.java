@@ -1,7 +1,5 @@
 package com.eynan.shoppingmore.model.data;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.util.UUID;
 

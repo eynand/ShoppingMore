@@ -1,9 +1,6 @@
 package com.eynan.shoppingmore.model.data;
 
-import lombok.Data;
-
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;

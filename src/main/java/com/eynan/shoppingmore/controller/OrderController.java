@@ -5,7 +5,6 @@ import com.eynan.shoppingmore.model.data.Order;
 import com.eynan.shoppingmore.service.OrderService;
 import com.eynan.shoppingmore.service.UserService;
 import lombok.Data;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
